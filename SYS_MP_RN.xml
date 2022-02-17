@@ -1,0 +1,1203 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SYS_MP_RN
+</name>
+</assembly>
+<members>
+<member name="T:SYS_MP_RN.My.Resources.Resources">
+<summary>
+  Clase de recurso con establecimiento inflexible de tipos, para buscar cadenas traducidas, etc.
+</summary>
+</member>
+<member name="P:SYS_MP_RN.My.Resources.Resources.ResourceManager">
+<summary>
+  Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
+</summary>
+</member>
+<member name="P:SYS_MP_RN.My.Resources.Resources.Culture">
+<summary>
+  Reemplaza la propiedad CurrentUICulture del subproceso actual para todas las
+  búsquedas de recursos mediante esta clase de recurso con establecimiento inflexible de tipos.
+</summary>
+</member>
+<member name="T:SYS_MP_RN.clsDina.TipoEstadoProcesamientoDina">
+ <summary>
+ Representa el estado de procesamiento del dina.
+ </summary>
+ <remarks>
+ SinProcesar = Solo está almacenada la carta medida. La rtu no tiene calibración para procesar la carta de superficie.
+ Calibrado = Solo está procesada la carta de superficie. El pozo no tiene datos completos de instalación para ser procesado.
+ Procesado = Dina con procesamiento completo
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDina.#ctor(System.Data.SqlClient.SqlDataReader)">
+ <summary>
+ Constructor dinámico a partir del resultado de una consulta a la base de datos.
+ Este constructor se debe utilizar para que la clase dina construya la medición según los datos de la base de datos.
+ </summary>
+ <param name="aReader"></param>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDina.dbDina">
+ <summary>
+ 1) Instancia una medición dinamométrica de la base de datos. 
+ 2)Obtiene el diseño del pozo para la fecha de la medicion. 
+ 3)Obtiene los GPM de la tabla 'vbles' para la fecha de la medicion. 
+ 4)Obtiene la calibración de la rtu con la que se hizo la miedición.
+ 5)Se procesa la medición y se dejan disponibles todos los objetos que representan el análisis dinamométrico.  
+ </summary>
+ <remarks>
+ 1) Precondición: Debe estar seteada la propiedad 'IdDina'.
+ 2) En la propiedad ColErrores se agregan tanto los errores que surgieran como la falta de información para el procesamiento.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDina.dbMaxIdDina">
+ <summary>
+ Este método retorna el id de la última medición dinamometrica del pozo según la fecha.
+ </summary>
+ <returns>
+ 0=No hay dinas para la instalación o la instalación no existe.
+ n=Id de la última medición dinamometrica
+ </returns>
+ <remarks>
+ 1) Precondición: Debe estar seteada la propiedad 'IdDina'.
+ 2) En la propiedad ColErrores se agregan tanto los errores que surgieran como el incumplimiento de las precondiciones.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDina.ConsultarCartasSiguientes(System.Int32,System.Int32)">
+ <summary>
+ Revisar par unificar dbCartaAntPost
+ </summary>
+ <param name="aIdCarta"></param>
+ <param name="aDias"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDina.dbCartaAntPost(System.Int32,System.String)">
+ <summary>
+ Revisar para unificar ConsultarCartasSiguientes
+ </summary>
+ <param name="aIdCarta"></param>
+ <param name="tipo"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDina.dbMaxNumeroReporte">
+ <summary>
+ 
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDinaAnalisis.#ctor(SYS_MP_RN.clsDina,System.Data.SqlClient.SqlDataReader)">
+ <summary>
+ Constructor dinámico a partir del resultado de una consulta a la base de datos.
+ Este constructor se debe utilizar para que la clase dina procese toda la medición.
+ </summary>
+ <param name="aReader"></param>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDinaAnalisisProduccionEnFondo.#ctor(System.Data.SqlClient.SqlDataReader)">
+ <summary>
+ Constructor dinámico a partir del resultado de una consulta a la base de datos.
+ Este constructor se debe utilizar para que la clase dina procese toda la medición.
+ </summary>
+ <param name="aReader"></param>
+ <remarks></remarks>
+</member>
+<member name="T:SYS_MP_RN.clsDinaCartaMedidaCorregida">
+ <summary>
+ Para el caso de un dina con cargas medida en la viga, representa la carta medida con las correcciones necesarias para igualar a una carta medida en el vátago.
+ </summary>
+ <remarks>
+ Correcciones que se realizan:
+ 1) Inversión de medición de cargas y posición 
+ 2) Efectos de tracción y compresión de la viga.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDinaCartaMedidaPunto.#ctor(SYS_MP_RN.clsDinaCartaMedida,System.Data.SqlClient.SqlDataReader)">
+ <summary>
+ Constructor dinámico a partir del resultado de una consulta a la base de datos.
+ Este constructor se debe utilizar para que la clase dina procese toda la medición.
+ </summary>
+ <param name="aReader"></param>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDinaMotor.#ctor(SYS_MP_RN.clsDina,System.Data.SqlClient.SqlDataReader)">
+ <summary>
+ Constructor dinámico a partir del resultado de una consulta a la base de datos.
+ Este constructor se debe utilizar para que la clase dina procese toda la medición.
+ </summary>
+ <param name="aReader"></param>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDinaReductor.#ctor(SYS_MP_RN.clsDina,System.Data.SqlClient.SqlDataReader)">
+ <summary>
+ Constructor dinámico a partir del resultado de una consulta a la base de datos.
+ Este constructor se debe utilizar para que la clase dina procese toda la medición.
+ </summary>
+ <param name="aReader"></param>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDinaReductorPuntoTorque.#ctor(SYS_MP_RN.clsDinaReductor,System.Data.SqlClient.SqlDataReader)">
+ <summary>
+ Constructor dinámico a partir del resultado de una consulta a la base de datos.
+ Este constructor se debe utilizar para que la clase dina procese toda la medición.
+ </summary>
+ <param name="aReader"></param>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDinaCartaSuperficiePunto.#ctor(SYS_MP_RN.clsDinaCartaSuperficie,System.Data.SqlClient.SqlDataReader)">
+ <summary>
+ Constructor dinámico a partir del resultado de una consulta a la base de datos.
+ Este constructor se debe utilizar para que la clase dina procese toda la medición.
+ </summary>
+ <param name="aReader"></param>
+ <remarks></remarks>
+</member>
+<member name="T:SYS_MP_RN.clsDinaSarta">
+ <summary>
+ 
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsDinaBombaPunto.#ctor(SYS_MP_RN.clsDinaBomba,System.Data.SqlClient.SqlDataReader)">
+ <summary>
+ Constructor dinámico a partir del resultado de una consulta a la base de datos.
+ Este constructor se debe utilizar para que la clase dina procese toda la medición.
+ </summary>
+ <param name="aReader"></param>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsRtuDinaCalibracion.#ctor(Conexion.clsSql,SYS_MP_RN.clsInstRTU,System.DateTime)">
+ <summary>
+ Constructor que se puede usar para luego llamar al método 'dbRtuDinaCalibracion' para instanciar de la base de datos una calibración de una rtu por su intalación y fecha.
+ </summary>
+ <param name="aBd"></param>
+ <param name="aObjInstRtu">Debe tener seteada las propiedades ObjInstRtu.IdInstRTU para poder llamar el método dbRtuDinaCalibracion</param>
+ <param name="aFechaRtuDinaCalibracion"></param>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsPozoAjustePF.#ctor(Conexion.clsSql,SYS_MP_RN.clsPozo,System.DateTime)">
+ <summary>
+ Constructor que se puede usar para luego llamar al método 'dbRtuDinaCalibracionSumergencia' para instanciar de la base de datos una calibración por su fecha.
+ </summary>
+ <param name="aBd"></param>
+ <param name="aObjPozo">Debe tener seteada las propiedades ObjPozo.IdInst para poder llamar el método dbRtuDinaCalibracion</param>
+ <param name="aFechaAjustePFDina">Fecha para la cual se desea encontrar la calibración. En caso de no existir coincidencia exacta, buscará la inmediatamente anterior.</param>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsEstados.ConsultarParos(System.DateTime,System.DateTime,System.Int32)">
+ <summary>
+ llena una coleccion con estados (PARO/MARCHA) desde, hasta, sobre la instalacion a consultar
+ solo para graficar!!!
+ </summary>
+ <param name="aFechaEstadoDesde"></param>
+ <param name="aFechaEstadoHasta"></param>
+ <param name="aIdInst"></param>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsEstados.ConsultarUltimosEstados(SYS_MP_RN.clsBateria)">
+ <summary>
+ llena la colección de estados con el último estado de cada pozo de la batería solicitada por parámetro
+ </summary>
+</member>
+<member name="M:SYS_MP_RN.clsBateria.consultarPozosBM">
+ <summary>
+ Llena la colección de pozos ordenada ascendente por nombre de pozo con Bombeo Mecánico.
+ </summary>
+</member>
+<member name="M:SYS_MP_RN.clsBateria.consultarPozosBES">
+ <summary>
+ Llena la colección de pozos ordenada ascendente por nombre de pozo con Bombeo Mecánico.
+ </summary>
+</member>
+<member name="M:SYS_MP_RN.clsBateria.ConsultarPozosCompleto">
+ <summary>
+ Llena la colección de pozos ordenada ascendente por nombre de pozo con la última solicitud de cambio de estado, el último estado y las rtus actuales.
+ </summary>
+ <remarks>Iternamente implementa los siguientes métodos: ConsultarPozos, AgregarUltimoEstado, AsignarUltimaSolicitudPMR, AsignarRtusActuales</remarks>
+</member>
+<member name="M:SYS_MP_RN.clsBateria.AsignarUltimoEstado">
+ <summary>
+ Asigna a la colección de pozos existente, el último estado de cada uno.
+ </summary>
+</member>
+<member name="M:SYS_MP_RN.clsBateria.AsignarRtusActuales">
+ <summary>
+ Asigna a la colección de pozos existente, las rtus actuales. Asigna todas las que no están dada de baja.
+ </summary>
+</member>
+<member name="M:SYS_MP_RN.clsBateria.AsignarUltimaSolicitudPMR">
+ <summary>
+ Asigna a la colección de pozos existente, la última solicitud de Paro o Marcha Remota.
+ </summary>
+</member>
+<member name="M:SYS_MP_RN.clsfRtusBridge.dbConsultar">
+ <summary>
+ Consulta de la base de datos las RTU para pasar por la red
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Flag.clsAlarma.dbAgregar(Conexion.clsSql)">
+ <summary>
+ Agrega una traza del servicio Tecss.EyesOn.ServiceFlag Flag en la base de datos.
+ </summary>
+ <returns></returns>
+ <remarks>
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Flag.clsAlarmas.dbConsultarEnviarInicioPorMail(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos los Trazas con el atributo FechaTrazaSolicitudFlag comprendido entre los valores de los parámetros, ordenadas por FechaSolicitudFlag
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Flag.clsAlarmas.dbConsultarEnviarFinPorMail(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos los Trazas con el atributo FechaTrazaSolicitudFlag comprendido entre los valores de los parámetros, ordenadas por FechaSolicitudFlag
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Flag.clsConfig.SetearDefault">
+ <summary>
+ Setea los valores por defecto de la configuración.
+ LimiteReintentosSolicitudReporte = 5, 
+ LimiteReintentosModbusSolicitudFlag = 5,
+ MilisegundosTimeoutModbusSolicitudFlag = 200, 
+ </summary>
+ <remarks>
+ Puede ser utilizado cuando no se puede obtener una configuración de la base de datos.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Flag.clsTraza.dbAgregar(Conexion.clsSql)">
+ <summary>
+ Agrega una traza del servicio Tecss.EyesOn.ServiceFlag Flag en la base de datos.
+ </summary>
+ <returns></returns>
+ <remarks>
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Flag.clsTrazas.dbConsultar(Conexion.clsSql,System.DateTime,System.DateTime)">
+ <summary>
+ Consulta de la base de datos los Trazas con el atributo FechaTrazaSolicitudFlag comprendido entre los valores de los parámetros, ordenadas por FechaSolicitudFlag
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Log.clsLog.#ctor(System.Int32,System.DateTime,System.String,System.String,System.String,System.String,System.Int32,SYS_MP_RN.Log.EnumTipoLog)">
+ <summary>
+ Constructor para un log genérico.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Log.clsLog.#ctor(System.Int32,System.DateTime,System.String,System.String,System.String,System.String,System.Int32,SYS_MP_RN.Log.EnumTipoLog,SYS_MP_RN.Pmr.clsSolicitud)">
+ <summary>
+ Constructor para un log del espacio de nombres PMR
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Log.clsLog.#ctor(System.Int32,System.DateTime,System.String,System.String,System.String,System.String,System.Int32,SYS_MP_RN.Log.EnumTipoLog,SYS_MP_RN.Flag.clsFlag)">
+ <summary>
+ Constructor para un log del espacio de nombres FLAG
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Log.clsLogs.dbConsultar(Conexion.clsSql,System.DateTime,System.DateTime)">
+ <summary>
+ Consulta de la base de datos los logs con el atributo FechaLogSolicitudPmr comprendido entre los valores de los parámetros, ordenadas por FechaSolicitudPmr
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsAlarma.ObjReglaPmr">
+ <summary>
+ Regla asociada a la alarma. 
+ La asociación es realizada por el servicio Tecss.Eyeson.Motor, al momento de crear la alarma.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsAlarma.AlarmaPmrProcesada">
+ <summary>
+ Indica si la alarma ha sido procesada por el servicio Tecss.Eyeson.ServicePmr.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsAlarma.ReglaPmrCumplida">
+ <summary>
+ Indica si la alarma cimple la regla asociada.
+ Su valor es seteado por el método dbEvaluarRegla, que es invocado por el servicio Tecss.Eyeson.ServicePmr.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsAlarma.dbActualizarProcesada(Conexion.clsSql)">
+ <summary>
+ Actualiza en la base de datos la propiedad AlarmaPmrProcesada. 
+ Es realizdo por el servicio Tecss.Eyeson.ServicePmr, luego de analizar la regla asociada a la alarma
+ </summary>
+ <returns>
+ True: pudo realizar la modificación,
+ False: ocurrió un error al realizar la modificación
+ </returns>
+ <remarks>
+ Los errores que ocurran en el método son guardados en la propiedad colLogPmr
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsAlarma.dbAgregar(Conexion.clsSql)">
+ <summary>
+ Agrega una alarma de pmr en la base de datos.
+ </summary>
+ <returns></returns>
+ <remarks>
+ Al agregar una solicitud de PMR, su estado es "en ejecución". 
+ No es necesario agregar el estado de la solicitud a la colección del objeto, ya que este método agrega el estado "en ejecución" automaticamente.
+ Este método NO permite agregar otros estados de la solicitud.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsAlarma.dbActualizarReglaCumplida(Conexion.clsSql)">
+ <summary>
+ Actualiza en la base de datos la propiedad ReglaPmrCumplida. 
+ Es realizado por el método dbEvaluarRegla de esta clase, invocado por el servicio Tecss.Eyeson.ServicePmr al evaluar la regla asociada a la alarma.
+ </summary>
+ <returns>
+ True: pudo realizar la modificación,
+ False: ocurrió un error al realizar la modificación
+ </returns>
+ <remarks>
+ Los errores que ocurran en el método son guardados en la propiedad colLogPmr
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsAlarma.dbEvaluarRegla(Conexion.clsSql)">
+ <summary>
+ Evalua el cummplimiento de la regla asociada a la alarma y setea la propiedad ReglaPmrCumplida.
+ También actualiza la propiedad en la base de datos.
+ </summary>
+ <param name="aConexion"></param>
+ <returns>
+ True=No se produjo ninguna excepción.
+ False=Se produjo una excepciópodemn en el tratamiento de la regla.
+ </returns>
+ <remarks>
+ Actualiza la propiedad y la base de datos para cualquier caso, se cumpla o no la regla.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsAlarma.EvaluarReglaBajaTempraturaEnBes(Conexion.clsSql,System.Boolean@)">
+ <summary>
+ Evalua la regla y devuelve por referencia el cumplimiento de la misma.
+ </summary>
+ <returns></returns>
+ <remarks>
+ La regla es valida para las siguientes situaciones.
+ La variable que se está evaluadndo está en alarma y la variable inmediatamente anterior es nothing o NO está en alarma.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsAlarmas.ConsultarAlarmasSinProcesar(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos las alarmas con el atributo AlarmaPmrProcesada = False ordenadas por FechaAlarmaVble
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsConfig.SetearDefault">
+ <summary>
+ Setea los valores por defecto de la configuración.
+ LimiteReintentosSolicitudPmr = 5, 
+ LimiteReintentosModbusSolicitudPmr = 5,
+ MilisegundosTimeoutModbusSolicitudPmr = 200, 
+ </summary>
+ <remarks>
+ Puede ser utilizado cuando no se puede obtener una configuración de la base de datos.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsFlags.ConsultarFlagsSinProcesar(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos las respuestas de comandos remotos con el atributo FlagProcesado = False ordenadas por FechaFlag
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsLogs.dbConsultar(Conexion.clsSql,System.DateTime,System.DateTime)">
+ <summary>
+ Consulta de la base de datos los logs con el atributo FechaLogSolicitudPmr comprendido entre los valores de los parámetros, ordenadas por FechaSolicitudPmr
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsRegla.TipoAccionReglaPmr">
+ <summary>
+ Indica la acción remota a realizar, Paro o Marcha, cuando se cumpla la regla.
+ </summary>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitudes.ConsultarSolicitudesPmrEnProceso(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos las solicitudes con el atributo EstadoSolicitudPmr = 1 ordenadas por FechaSolicitudPmr
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitudes.ConsultarSolicitudesPmrActivas(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos las solicitudes con el atributo SolicitudPmrActiva = true y el atributo EstadoSolicitudPmr = 1  ordenadas por FechaSolicitudPmr
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitudes.ConsultarSolicitudesPmr(Conexion.clsSql,System.DateTime,System.DateTime)">
+ <summary>
+ Consulta de la base de datos las solicitudes con el atributo FechaSolicitudPmr comprendido entre los valores de los parámetros, ordenadas por FechaSolicitudPmr
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitudes.ConsultarSolicitudesPmrParaReporting(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos las solicitudes con el atributo SolicitudPmrProcesadaServiceReporting = false y el atributo EstadoSolicitudPmr distinto a 1 (que no esté en proceso) ordenadas por FechaSolicitudPmr
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsSolicitud.IdSolicitudPmr">
+ <summary>
+ Identificador único en la base de datos de la solicitud de acción remota.
+ </summary>
+ <remarks>
+ Su valor es creado automáticamente al agregar la solicitud en la base de datos.
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsSolicitud.FechaSolicitudPmr">
+ <summary>
+ Fecha de creación de la solicitud de accion remota.
+ </summary>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsSolicitud.TipoAccionSolicitudPmr">
+ <summary>
+ Indica la acción remota a realizar, Paro o Marcha.
+ </summary>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsSolicitud.ObjInstalacion">
+ <summary>
+ Indica la instalación que será instanciada por el servicio Tecss.Eyeson.ServiceFlags, para enviar el comando al equipo de paro remoto asociado.
+ </summary>
+ <remarks>
+ Puede ser cualquier tipo de instalación.
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsSolicitud.LimiteReintentosSolicitudPmr">
+ <summary>
+ Cantidad máxima de envíos de comando remoto que se pueden realizar.
+ </summary>
+ <remarks>
+ Su valor es definido al momento de crear la solicitud y está predefinido en la configuración del sistema.
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsSolicitud.ReintentosEfectivosSolicitudPmr">
+ <summary>
+ Cantidad de envíos de comando remoto realizados.
+ </summary>
+ <remarks>
+ Su valor es incrementado por el servicio EyesOn.Service.Pmr, su valor máximo es LimiteReintentosSolicitudPmr.
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsSolicitud.SolicitudPmrActiva">
+ <summary>
+ Indica que debe ser procesada por el servicio que envía el comando remoto, Tecss.EyesOn.ServiceFlags.
+ </summary>
+ <value>
+ True=La solicitud debe ser procesada por el servicio Tecss.EyesOn.ServiceFlags
+ True=La solicitud NO debe ser procesada por el servicio Tecss.EyesOn.ServiceFlags
+ </value>
+ <remarks>
+ Solamente la activa el servicio Tecss.EyesOn.ServicePmr, luego de analizar el límite de reintentos, y el éxito de activaciones anteriores.
+ Solamente la desactiva el servicio Tecss.EyesOn.ServiceFlags luego de enviar el comando remoto
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsSolicitud.ObjUsuario">
+ <summary>
+ Usuario que realizó la solicitud de acción remota en forma manual desde el SCADA.
+ </summary>
+ <remarks>
+ Si la solicitud fue creada en forma automática, su valor es nothing.
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsSolicitud.ObjAlarmaPmr">
+ <summary>
+ Alarma a partir de la cual se genera la solicitud de acción remota en forma automática. 
+ </summary>
+ <remarks>
+ Que se genere una solicitud a partir de una alarma, significa que la misma valida la regla asociada.
+ Si la solicitud fue creada en forma manual, su valor es nothing.
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsSolicitud.EstadoSolicitudPmr">
+ <summary>
+ Estado de la solicitud. El estado inicial es en proceso y luego es modificado por el servicio Tecss.EyesOn.ServiceFlags.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:SYS_MP_RN.Pmr.clsSolicitud.SolicitudPmrProcesadaServiceReporting">
+ <summary>
+ Indica que debe ser procesara por el servicio Tecss.EyesOn.ServiceReporting 
+ </summary>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitud.dbSolicitudPmr(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos la solicitud con el atributo IdSolicitudPmr = al valor de la misma proiedad en el objeto
+ </summary>
+ <remarks>
+ aConexion.setStoreProcedure("Pmr_SolicitudSel"),
+ aConexion.ColParametros.AddWithValue("@IdSolicitudPmr", Me.IdSolicitudPmr)
+ </remarks>
+ <Control>
+ 15/9/12 - Lob - Creación
+ </Control>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitud.dbAgregar(Conexion.clsSql)">
+ <summary>
+ Agrega una solicitud de acción remota en la base de datos.
+ </summary>
+ <returns></returns>
+ <remarks>
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitud.dbActualizarEstado(Conexion.clsSql)">
+ <summary>
+ Actualiza en la base de datos el atributo EstadoSolicitudPmr
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitud.dbActualizarActivacion(Conexion.clsSql)">
+ <summary>
+ Actualiza en la base de datos el atributo SolicitudPmrActiva
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitud.dbActualizarReintentosEfectivos(Conexion.clsSql)">
+ <summary>
+ Actualiza en la base de datos el atributo ReintentosEfectivosSolicitudPmr
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitud.dbActualizarProcesadaServiceReporting(Conexion.clsSql)">
+ <summary>
+ Actualiza en la base de datos el atributo SolicitudPmrActiva
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitud.dbConsultarTx(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos los TX con el atributo IdSolicitudPmr = al valor de la misma proiedad en el objeto
+ </summary>
+ <remarks>
+ aConexion.setStoreProcedure("Pmr_TxCons"),
+ aConexion.ColParametros.AddWithValue("@IdSolicitudPmr", Me.IdSolicitudPmr)
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitud.dbEvaluarCancelacion(Conexion.clsSql,System.Int32)">
+ <summary>
+ Evalua la cancelación de la solicitud actualizando propiedad y base de datos. 
+ Si la solicitud es cancelada, además se actualiza la propiedad y base de datos del atributo SolicitudPmrActiva en false
+ Método utilizado en el sevicio Tecss.Eyeson.ServicePmr
+ </summary>
+ <param name="aBd"></param>
+ <param name="aMinutosLimiteProcesamientoSolicitud"></param>
+ <returns></returns>
+ <remarks>
+ Si el tiempo transcurrido entre la creación de la solicitud y el momento de evaluación supera el parámetro aMinutosLimiteProcesamientoSolicitud,
+ se actualiza la propiedad EstadoSolicitudPmr en 4.
+ Además se actualiza la solicitud en la base de datos con el nuevo estado
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitud.dbEvaluarActivacion(Conexion.clsSql)">
+ <summary>
+ Evalua la activación de la solicitud actualizando propiedad y base de datos.
+ Método utilizado en el sevicio Tecss.Eyeson.ServicePmr
+ </summary>
+ <param name="aBd"></param>
+ <returns></returns>
+ <remarks>
+ Si la cantidad de reintentos efectivos no supera el límite de reintentos definido en la creación de la solicitud,
+ se actualiza la propiedad SolicitudPmrActiva en true.
+ Además se actualiza la solicitud en la base de datos con el nuevo valor de la propiedad SolicitudPmrActiva.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsSolicitud.dbEvaluarRespuestaEquipoPmr(Conexion.clsSql,SYS_MP_RN.Pmr.clsTxSolicitud)">
+ <summary>
+ Actualiza los reintentos efectivos de la solicitud, el estado según el tipo de respuesta y guarda en la base de datos el objeto de la clase clsTxSolicitud.
+ </summary>
+ <remarks>
+ Me.ReintentosEfectivosSolicitudPmr += 1, Me.dbModificarReintentosEfectivos.
+ -
+ If aObjTxSolicitudPmr.TipoTxSolicitudPmr = EnumTipoTx.Aceptada Then Me.EstadoSolicitudPmr = EnumEstadoSolicitud.Realizada
+ If (aObjTxSolicitudPmr.TipoTxSolicitudPmr = EnumTipoTx.Fallida) And (Me.ReintentosEfectivosSolicitudPmr >= Me.LimiteReintentosSolicitudPmr) Then Me.EstadoSolicitudPmr = EnumEstadoSolicitud.Fallida
+ Me.dbActualizarEstado
+ -
+ aObjTxSolicitudPmr.dbAgregar
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Pmr.clsTraza.dbAgregar(Conexion.clsSql)">
+ <summary>
+ Agrega una traza del servicio EyesOn.Service.Pmr pmr en la base de datos.
+ </summary>
+ <returns></returns>
+ <remarks>
+ </remarks>
+</member>
+<member name="F:SYS_MP_RN.Pmr.EnumEstadoSolicitud.EnProceso">
+ <summary>
+ La solicitud debe ser tratada por el servicio EyesOn.Service.Flags
+ </summary>
+ <remarks>
+ Este estado es el inicial, y se mantiene hasta que el servicio EyesOn.Service.Pmr determine el fin del tratamiento de la solicitud
+ </remarks>
+</member>
+<member name="F:SYS_MP_RN.Pmr.EnumEstadoSolicitud.Realizada">
+ <summary>
+ El equipo de paro remoto ha contestado el comando enviado durante su tratamiento por el servicio EyesOn.Service.Flags
+ </summary>
+ <remarks>
+ Seteado por el servicio EyesOn.Service.Pmr
+ </remarks>
+</member>
+<member name="F:SYS_MP_RN.Pmr.EnumEstadoSolicitud.Fallida">
+ <summary>
+ El equipo de paro remoto NO ha contestado NINGUNO de los comandos enviados durante su tratamiento por el servicio EyesOn.Service.Flags
+ </summary>
+ <remarks>
+ Seteado por el servicio EyesOn.Service.Pmr
+ </remarks>
+</member>
+<member name="F:SYS_MP_RN.Pmr.EnumEstadoSolicitud.Cancelada">
+ <summary>
+ Se ha exedido el tiempo configurado para el tratamiento de solicitudes. Aun cuando no se haya realizado ningún tratamiento de la solicitud, el servicio El equipo de paro remoto ha contestado el comando enviado durante su tratamiento por el servicio EyesOn.Service.Pmr, la deja en este estado.
+ </summary>
+ <remarks>
+ Seteado por el servicio EyesOn.Service.Pmr
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.clsPozoAibContrapesoSiam7.AnguloDesfazaje">
+ <summary>
+ Angulo respecto de la horizontal en el que se encuentra el máximo torque.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsPozoAibContrapesoSiam7.CalcularAnguloEpsilon(System.Double)">
+ <summary>
+ Devuelve el ángulo entre el contrapeso y la línea de simetría de la manivela.
+ </summary>
+ <param name="aCantidadDientes">Cantidad de dientes que se cuentan entre la linea de simetría de la manivela y la cara de abajo del contrapeso 1 y la cara de arriba del contrapeso 2</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsPozoAibContrapesoSiam7.CalcularRCP(System.Double,System.Double,System.Double)">
+ <summary>
+ Devuelve la distancia en pulgadas desde el eje del reductor al baricentro del contrapeso
+ </summary>
+ <param name="aDistanciaRCManivela">Distancia en pulgadas desde el eje del reductor al centro geométrico de la manivela</param>
+ <param name="aDistanciaR1">Distancia en pulgadas desde el centro geométrico de la manivela al baricentro del contrapeso</param>
+ <param name="aAnguloEpsilon">Ángulo en grados del contrapeso respecto del medio de la manivela</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsPozoAibContrapesoSiam7.CalcularAnguloGama(System.Double,System.Double,System.Double)">
+ <summary>
+ Devuelve el ángulo entre la línea de simetría de la manivela y la recta que une el eje del reductor con el baricentro del contrapeso.
+ </summary>
+ <param name="aDistanciaR1">Distancia en pulgadas desde el centro geométrico de la manivela al baricentro del contrapeso</param>
+ <param name="aAnguloEpsilon">Ángulo entre el contrapeso y la línea de simetría de la manivela.</param>
+ <param name="aDistanciaRCP">Distancia en pulgadas desde el eje del reductor al baricentro del contrapeso</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:SYS_MP_RN.clsTipoManivela.DistanciaRC">
+ <summary>
+ La distancia entre el eje del reductor y el centro geométrico de la manivela, en Pulg.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks>
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.clsTipoManivela.TorqueManivela">
+ <summary>
+ El torque máximo de las dos manivelas, en Lbs*Pulg.
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsTipoManivela.#ctor(System.Double,System.Double)">
+ <summary>
+ 
+ </summary>
+ <param name="ADistanciaRC">La distancia entre el eje del reductor y el centro geométrico de la manivela, en Pulg.</param>
+ <param name="aTorqueManivela">El torque máximo de las dos manivelas, en Lbs*Pulg.</param>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsConfig.SetearDefault">
+ <summary>
+ Setea los valores por defecto de la configuración.
+ LimiteReintentosSolicitudReporte = 5, 
+ LimiteReintentosModbusSolicitudReporting = 5,
+ MilisegundosTimeoutModbusSolicitudReporting = 200, 
+ </summary>
+ <remarks>
+ Puede ser utilizado cuando no se puede obtener una configuración de la base de datos.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsLogs.dbConsultar(Conexion.clsSql,System.DateTime,System.DateTime)">
+ <summary>
+ Consulta de la base de datos los logs con el atributo FechaLogSolicitudReporting comprendido entre los valores de los parámetros, ordenadas por FechaSolicitudReporting
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="P:SYS_MP_RN.Reporting.clsSolicitud.IdSolicitudReporte">
+ <summary>
+ Identificador único en la base de datos de la solicitud de acción remota.
+ Su valor es creado automáticamente al agregar la solicitud en la base de datos.
+ </summary>
+</member>
+<member name="P:SYS_MP_RN.Reporting.clsSolicitud.FechaSolicitudReporte">
+ <summary>
+ Fecha de creación de la solicitud de accion remota.
+ </summary>
+</member>
+<member name="P:SYS_MP_RN.Reporting.clsSolicitud.ObjReporte">
+ <summary>
+ Falta
+ </summary>
+</member>
+<member name="P:SYS_MP_RN.Reporting.clsSolicitud.LimiteReintentosSolicitudReporte">
+ <summary>
+ Cantidad máxima de envíos de comando remoto que se pueden realizar.
+ </summary>
+ <remarks>
+ Su valor es definido al momento de crear la solicitud y está predefinido en la configuración del sistema.
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.Reporting.clsSolicitud.ReintentosEfectivosSolicitudReporte">
+ <summary>
+ Cantidad de envíos de comando remoto realizados.
+ </summary>
+ <remarks>
+ Su valor es incrementado por el servicio EyesOn.Service.Reporting, su valor máximo es LimiteReintentosSolicitudReporte.
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.Reporting.clsSolicitud.EstadoSolicitudReporte">
+ <summary>
+ Estado de la solicitud. El estado inicial es en proceso y luego es modificado por el servicio Tecss.EyesOn.ServiceFlags.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:SYS_MP_RN.Reporting.clsSolicitud.SolicitudReporteActiva">
+ <summary>
+ Indica que debe ser procesada por el servicio que envía el comando remoto, Tecss.EyesOn.ServiceFlags.
+ </summary>
+ <value>
+ True=La solicitud debe ser procesada por el servicio Tecss.EyesOn.ServiceFlags
+ True=La solicitud NO debe ser procesada por el servicio Tecss.EyesOn.ServiceFlags
+ </value>
+ <remarks>
+ Solamente la activa el servicio Tecss.EyesOn.ServiceReporting, luego de analizar el límite de reintentos, y el éxito de activaciones anteriores.
+ Solamente la desactiva el servicio Tecss.EyesOn.ServiceFlags luego de enviar el comando remoto
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.Reporting.clsSolicitud.ObjUsuarioSolicitudReporte">
+ <summary>
+ Usuario que realizó la solicitud de acción remota en forma manual desde el SCADA.
+ </summary>
+ <remarks>
+ Si la solicitud fue creada en forma automática, su valor es nothing.
+ </remarks>
+</member>
+<member name="P:SYS_MP_RN.Reporting.clsSolicitud.ObjSolicitudPmr">
+ <summary>
+ 
+ </summary>
+</member>
+<member name="P:SYS_MP_RN.Reporting.clsSolicitud.ObjAlarmaFlag">
+ <summary>
+ Alarma que generó la solicitud de envío de reporte.
+ </summary>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitud.dbSolicitudReporting(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos la solicitud con el atributo IdSolicitudReporte = al valor de la misma proiedad en el objeto
+ </summary>
+ <remarks>
+ aConexion.setStoreProcedure("Reporting_SolicitudSel"),
+ aConexion.ColParametros.AddWithValue("@IdSolicitudReporte", Me.IdSolicitudReporte)
+ </remarks>
+ <Control>
+ 15/9/12 - Lob - Creación
+ </Control>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitud.dbAgregar(Conexion.clsSql)">
+ <summary>
+ Agrega una solicitud de acción remota en la base de datos.
+ </summary>
+ <returns></returns>
+ <remarks>
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitud.dbActualizarEstado(Conexion.clsSql)">
+ <summary>
+ Actualiza en la base de datos el atributo EstadoSolicitudReporte
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitud.dbActualizarActivacion(Conexion.clsSql)">
+ <summary>
+ Actualiza en la base de datos el atributo SolicitudReporteActiva
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitud.dbActualizarReintentosEfectivos(Conexion.clsSql)">
+ <summary>
+ Actualiza en la base de datos el atributo ReintentosEfectivosSolicitudReporte
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitud.dbActualizarSolicitud(Conexion.clsSql)">
+ <summary>
+ Actualiza en la base de datos los datos de la solicitud luego del envio (o intento de envio)
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitud.dbEvaluarCancelacion(Conexion.clsSql,System.Int32)">
+ <summary>
+ Evalua la cancelación de la solicitud actualizando propiedad y base de datos. 
+ Si la solicitud es cancelada, además se actualiza la propiedad y base de datos del atributo SolicitudReporteActiva en false
+ Método utilizado en el sevicio Tecss.Eyeson.ServiceReporting
+ </summary>
+ <param name="aBd"></param>
+ <param name="aMinutosLimiteProcesamientoSolicitud"></param>
+ <returns></returns>
+ <remarks>
+ Si el tiempo transcurrido entre la creación de la solicitud y el momento de evaluación supera el parámetro aMinutosLimiteProcesamientoSolicitud,
+ se actualiza la propiedad EstadoSolicitudReporte en 4.
+ Además se actualiza la solicitud en la base de datos con el nuevo estado
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitud.dbEvaluarActivacion(Conexion.clsSql)">
+ <summary>
+ Evalua la activación de la solicitud actualizando propiedad y base de datos.
+ Método utilizado en el sevicio Tecss.Eyeson.ServiceReporting
+ </summary>
+ <param name="aBd"></param>
+ <returns></returns>
+ <remarks>
+ Si la cantidad de reintentos efectivos no supera el límite de reintentos definido en la creación de la solicitud,
+ se actualiza la propiedad SolicitudReporteActiva en true.
+ Además se actualiza la solicitud en la base de datos con el nuevo valor de la propiedad SolicitudReporteActiva.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitud.dbEvaluarRespuestaEquipoReporte(Conexion.clsSql,SYS_MP_RN.Reporting.clsEnvioSolicitud)">
+ <summary>
+ ACOMODAR COMENTARIO
+ Actualiza los reintentos efectivos de la solicitud, el estado según el tipo de respuesta y guarda en la base de datos el objeto de la clase clsTxSolicitud.
+ </summary>
+ <remarks>
+ Me.ReintentosEfectivosSolicitudPmr += 1, Me.dbModificarReintentosEfectivos.
+ -
+ If aObjTxSolicitudPmr.TipoTxSolicitudPmr = EnumTipoTx.Aceptada Then Me.EstadoSolicitudPmr = EnumEstadoSolicitud.Realizada
+ If (aObjTxSolicitudPmr.TipoTxSolicitudPmr = EnumTipoTx.Fallida) And (Me.ReintentosEfectivosSolicitudPmr >= Me.LimiteReintentosSolicitudPmr) Then Me.EstadoSolicitudPmr = EnumEstadoSolicitud.Fallida
+ Me.dbActualizarEstado
+ -
+ aObjTxSolicitudPmr.dbAgregar
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitudes.dbConsultarSolicitudesReportingEnProceso(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos las solicitudes con el atributo EstadoSolicitudReporting = 1 ordenadas por FechaSolicitudReporting
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitudes.dbConsultarSolicitudesReportingActivas(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos las solicitudes con el atributo SolicitudReportingActiva = true y el atributo EstadoSolicitudReporting = 1  ordenadas por FechaSolicitudReporting
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitudes.dbConsultarSolicitudesReporting(Conexion.clsSql,System.DateTime,System.DateTime)">
+ <summary>
+ Consulta de la base de datos las solicitudes con el atributo FechaSolicitudReporting comprendido entre los valores de los parámetros, ordenadas por FechaSolicitudReporting
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsSolicitudes.dbConsultarSolicitudesReportingParaReporting(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos las solicitudes con el atributo SolicitudReportingProcesadaServiceReporting = false y el atributo EstadoSolicitudReporting distinto a 1 (que no esté en proceso) ordenadas por FechaSolicitudReporting
+ </summary>
+ <param name="aConexion"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsTraza.dbAgregar(Conexion.clsSql)">
+ <summary>
+ Agrega una traza del servicio EyesOn.Service.Reporting Reporting en la base de datos.
+ </summary>
+ <returns></returns>
+ <remarks>
+ </remarks>
+</member>
+<member name="F:SYS_MP_RN.Reporting.EnumEstadoSolicitud.EnProceso">
+ <summary>
+ La solicitud debe ser tratada por el servicio EyesOn.Service.Flags
+ </summary>
+ <remarks>
+ Este estado es el inicial, y se mantiene hasta que el servicio EyesOn.Service.Pmr determine el fin del tratamiento de la solicitud
+ </remarks>
+</member>
+<member name="F:SYS_MP_RN.Reporting.EnumEstadoSolicitud.Realizada">
+ <summary>
+ El equipo de paro remoto ha contestado el comando enviado durante su tratamiento por el servicio EyesOn.Service.Flags
+ </summary>
+ <remarks>
+ Seteado por el servicio EyesOn.Service.Pmr
+ </remarks>
+</member>
+<member name="F:SYS_MP_RN.Reporting.EnumEstadoSolicitud.Fallida">
+ <summary>
+ El equipo de paro remoto NO ha contestado NINGUNO de los comandos enviados durante su tratamiento por el servicio EyesOn.Service.Flags
+ </summary>
+ <remarks>
+ Seteado por el servicio EyesOn.Service.Pmr
+ </remarks>
+</member>
+<member name="F:SYS_MP_RN.Reporting.EnumEstadoSolicitud.Cancelada">
+ <summary>
+ Se ha exedido el tiempo configurado para el tratamiento de solicitudes. Aun cuando no se haya realizado ningún tratamiento de la solicitud, el servicio El equipo de paro remoto ha contestado el comando enviado durante su tratamiento por el servicio EyesOn.Service.Pmr, la deja en este estado.
+ </summary>
+ <remarks>
+ Seteado por el servicio EyesOn.Service.Pmr
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsReportes.dbConsultarSolicitudesReportingActivas(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos las solicitudes con el atributo SolicitudReportingActiva = true y el atributo EstadoSolicitudReporting = 1  
+ ordenadas por FechaSolicitudReporting y las agrupa en cada reporte
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.Reporting.clsReportes.dbConsultarSolicitudesReportingInformeActivas(Conexion.clsSql)">
+ <summary>
+ Consulta de la base de datos las solicitudes con el atributo SolicitudReportingActiva = true y el atributo EstadoSolicitudReporting = 1  
+ ordenadas por FechaSolicitudReporting y las agrupa en cada reporte
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsInstRTU.#ctor(System.Int32,System.DateTime,SYS_MP_RN.clsInst,SYS_MP_RN.clsRTU,System.Boolean)">
+ <summary>
+ Fecha de Escritura: 16/03/2010
+ </summary>
+ <param name="aIdInstRTU"></param>
+ <param name="aFechaAltaRTU"></param>
+ <param name="aObjInst"></param>
+ <param name="aObjRTU"></param>
+ <remarks>
+ Este constructor se debe utilizar para crear un ObjInstRtu que no está dado de baja.
+ Fue creado originalmente para ser usado en el método "ConsultarRtusPosibleParoPorTo", que devuelve rtus no están dadas de baja.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.clsInstsRTUs.ConsultarInstalacionesRtusActuales(SYS_MP_RN.clsBateria)">
+ <summary>
+ Llena la colección de isntalacionesRtus con las rtus actuales (no dadas de baja) asociadas a los pozos de la batería solicitada
+ </summary>
+</member>
+<member name="M:SYS_MP_RN.clsPozo.ConsultarDinasSinProcesarPorFrecuencia(System.DateTime,System.DateTime,System.Int32)">
+ <summary>
+ Llena la colección de dinas con mediciones SIN procesar, con aquellas que cumplan con el rango de fechas y distanciadas entre si en la cantidad de minutos 
+ definidos en el parámetro aFrecuencia
+ </summary>
+ <param name="aFechaDesde">OBLIGATORIO</param>
+ <param name="aFechaHasta">OBLIGATORIO</param>
+ <param name="aFrecuencia">OBLIGATORIO - Frecuencia en minutos que deben tener las mediciones a consultar</param>
+ <remarks>
+ Precondición: Me.IdInst DISTINTO de cero.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.clsRTU.EnTo(System.DateTime)">
+ <summary>
+ Permite determinar si la rtu está en to comparando la fecha del último flag recibido y aFechaComparacion
+ Para ver si está en timeout en este momento hacer aFechaComparacion = date.now()
+ </summary>
+ <param name="aFechaComparacion">
+ Fecha que se utilizará para comparar con ObjInstRtuRxI.FechaActualizacion
+ </param>
+ <returns></returns>
+ 
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsRTU.TiempoTo(System.DateTime)">
+ <summary>
+ Permite determinar si la rtu está en to comparando la fecha del último flag recibido y aFechaComparacion
+ Para ver si está en timeout en este momento hacer aFechaComparacion = date.now()
+ </summary>
+ <param name="aFechaComparacion">
+ Fecha que se utilizará para comparar con ObjInstRtuRxI.FechaActualizacion
+ </param>
+ <returns></returns>
+ 
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsRTUs.ConsultarRtusConSolicituPRPendiente">
+ <summary>
+ Llena la coleccionde Rtus de tipo PARO REMOTO con solicutdes de paro remoto pendientes.
+ </summary>
+ <remarks>Precondiciones: a) Rtus de Tipo PR b) Rtus Sin Problema c) Rtus sin Fecha de Baja c) Solicitud de paro remoto en ejecución.</remarks>
+</member>
+<member name="M:SYS_MP_RN.clsRTUs.ConsultarRtusConSolicituMRPendiente">
+ <summary>
+ Llena la coleccionde Rtus de tipo PARO REMOTO con solicutdes de marcha remota pendientes.
+ </summary>
+ <remarks>Precondiciones: a) Rtus de Tipo PR b) Rtus Sin Problema c) Rtus sin Fecha de Baja c) Solicitud de marcha remota en ejecución.</remarks>
+</member>
+<member name="M:SYS_MP_RN.clsVble.dbVblePorTipoPorFecha">
+ <summary>
+ Busca en la base de datos la variable del tipo seteado en la propiedad ObjTipoVble con ocurrencia mas cercana
+ a la fecha seteada en FechaInicio para la instalación seteada en ObjInst
+ </summary>
+ <remarks>
+ Precondicion: Se deben setear las propiedades ObjInst (Se necesita IdInst), ObjTipoVble (se necesita IdTipoVble) y FechaInicio.
+ La propiedad FechaInicio es reemplazada por el valor existente en la base de datos.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.clsfFlag.dbFlag">
+ <summary>
+ Devuelve un flag a partir del valor seteado en la propiedad id flag
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:SYS_MP_RN.clsfFlag.dbFlag(System.Int32,System.DateTime,System.Boolean)">
+ <summary>
+ Si Primero = True, devuelve el primer flag del día especificado en el parámetro, en caso contario
+ devuelve el último.
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+ 
+</member>
+<member name="M:SYS_MP_RN.clsEstMotivosParos.ConsultarMotivosParos(System.Int32,System.DateTime,System.DateTime)">
+ <summary>
+ Devuelve la coleccion con los motivos agrupados con el calculo de tiempo paro por motivo y la peridad
+ </summary>
+ <param name="lIdInst"></param>
+ <param name="aFechaEstadoDesde"></param>
+ <param name="aFechaEstadoHasta"></param>
+ <remarks></remarks>
+ 
+</member>
+<member name="M:SYS_MP_RN.clsSolicitudesPMR.ConsultarUltimasSolicitudesPMR(SYS_MP_RN.clsBateria)">
+ <summary>
+ Llena la colección con las últimas solicitudes de PMR de pozos que pertencen a la batería solicitada a PMR
+ </summary>
+</member>
+<member name="P:SYS_MP_RN.clsSolicitudPMR.ObjEstado">
+ <summary>
+ Reresenta el estado que confirma la acción de la solicitud.
+ </summary>
+ <remarks>
+ Al crearse la solicitud es nothing. Su valor es asignado por el motor en el momento que se recibe el primer estado que confirma la accion de la solicitud.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.clsSolicitudPMR.dbAgregar">
+ <summary>
+ Agrega una solicitud de Paro o marcha remota.
+ </summary>
+ <returns></returns>
+ <remarks>
+ Al agregar una solicitud de PMR, su estado es "en ejecución". 
+ No es necesario agregar el estado de la solicitud a la colección del objeto, ya que este método agrega el estado "en ejecución" automaticamente.
+ Este método NO permite agregar otros estados de la solicitud.
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.clsSolicitudPMR.dbAsignarEstado">
+ <summary>
+ Asigna el estado del pozo que confirma la ejecución exitosa de la solicitud
+ </summary>
+ <returns></returns>
+ <remarks>
+ Precondiciones:
+ a) Setear la propiedad: ObjEstado
+ </remarks>
+</member>
+<member name="M:SYS_MP_RN.clsSolicitudPMR.EvaluarCondicionAceptadoSinVerificar(System.Int32)">
+ <summary>
+ Evalua el timout de la solicitud de PMR segun la fecha indicada y le cambia el estado a Fallida.
+ </summary>
+ <remarks>
+ Se debe evaluar las siguientes precondiciones: 
+ a) El estado acutal sea "en ejecución" 
+ b) la fecha del estado actual debe superar el tiempo limite de timeout.
+ 
+ En caso de no cumplirse las precondiciones, se llena la colección de errores.
+ </remarks>
+ <param name="aTiempoTimeOut">Tiempo en minutos que debe superar ela solicitud para considerase en time out</param>
+ <returns>Falso; si no se cumplen las precondiciones y la condicion de timeout. Verdadero; se cumple todo lo anterior.</returns>
+</member>
+<member name="M:SYS_MP_RN.clsSolicitudPMR.EvaluarTimeOt(System.Int32)">
+ <summary>
+ Evalua el timout de la solicitud de PMR segun la fecha indicada y le cambia el estado a Fallida.
+ </summary>
+ <remarks>
+ Se debe evaluar las siguientes precondiciones: 
+ a) El estado acutal sea "en ejecución" 
+ b) la fecha del estado actual debe superar el tiempo limite de timeout.
+ 
+ En caso de no cumplirse las precondiciones, se llena la colección de errores.
+ </remarks>
+ <param name="aTiempoTimeOut">Tiempo en minutos que debe superar ela solicitud para considerase en time out</param>
+ <returns>Falso; si no se cumplen las precondiciones y la condicion de timeout. Verdadero; se cumple todo lo anterior.</returns>
+</member>
+<member name="M:SYS_MP_RN.clsSolicitudPMR.EvaluarVerificacionAccionPMR">
+ <summary>
+ Evauae el timout de la solicitud de PMR segun la fecha indicada y le cambia el estado a Finalizada.
+ </summary>
+ <remarks>Se debe evaluar las siguientes precondiciones: 
+ a) El estado acutal sea "en ejecución" 
+ b)La intalacion de parámetro sea la misma de la solitud 
+ c) El estado del parámetro sea igual al tipo de solicitud</remarks>
+</member>
+<member name="M:SYS_MP_RN.clsSolicitudPMR.dbAsignarAceptadoPorRtuPMR">
+ <summary>
+ Asigna el estado "Aceptado por la RTU de PMR" a la solicitud actual.
+ </summary>
+ <remarks>
+ Se debe evaluar las siguientes precondiciones: 
+ a) Se encuentre seteado el ID de la solicitud de PMR 
+ 
+ En caso de no cumplirse las precondiciones, se llena la colección de errores.
+ </remarks>
+ <returns>Falso; si no se cumplen las precondiciones. Verdadero; se cumple todo lo anterior.</returns>
+</member>
+</members>
+</doc>
